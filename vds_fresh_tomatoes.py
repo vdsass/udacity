@@ -1,6 +1,8 @@
 """
 vds_fresh_tomatoes.py
-    This module is a modified version of fresh_tomatoes.py provided by Udacity for developing a favorite movie web site. The modifications add additional information to the web display: movie release date and primary actors.
+    This module is a modified version of fresh_tomatoes.py provided by Udacity
+    for developing a favorite movie web site. The modifications add additional
+    information to the web display: movie release date and primary actors.
 """
 import webbrowser
 import os
@@ -15,11 +17,20 @@ main_page_head = '''
     <meta charset="utf-8">
     <title>VDS' Fresh Tomatoes Movie Trailers</title>
 
-    <!-- Bootstrap 3 -->
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <!-- Bootstrap 3 link urls shortened using https://goo.gl/
+     https://netdna.bootstrapcdn.com/bootstrap/3.1.0/
+             css/bootstrap.min.css => https://goo.gl/vaYRGw
+     https://netdna.bootstrapcdn.com/bootstrap/3.1.0/
+             css/bootstrap-theme.min.css => https://goo.gl/S3EBrZ
+    -->
+    <link rel="stylesheet" href="https://goo.gl/vaYRGw">
+    <link rel="stylesheet" href="https://goo.gl/S3EBrZ">
+
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script
+     src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">
+    </script>
+
     <style type="text/css" media="screen">
         body {
             padding-top: 60px;
@@ -63,16 +74,20 @@ main_page_head = '''
     </style>
     <script type="text/javascript" charset="utf-8">
         // Pause the video when the modal is closed
-        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
-            // Remove the src so the player itself gets removed, as this is the only
-            // reliable way to ensure the video stops playing in IE
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal',
+        function (event) {
+            // Remove the src so the player itself gets removed,
+            // as this is the only reliable way to ensure the video stops
+            // playing in IE
             $("#trailer-video-container").empty();
         });
         // Start playing the video whenever the trailer modal is opened
         $(document).on('click', '.movie-tile', function (event) {
             var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
-            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
-            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+            var sourceUrl = 'http://www.youtube.com/embed/' +
+              trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append(
+             $("<iframe></iframe>", {
               'id': 'trailer-video',
               'type': 'text-html',
               'src': sourceUrl,
@@ -96,8 +111,12 @@ main_page_content = '''
     <div class="modal" id="trailer">
       <div class="modal-dialog">
         <div class="modal-content">
-          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
-            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+          <a href="#" class="hanging-close"
+             data-dismiss="modal" aria-hidden="true">
+            <img src="https://
+             lh5.ggpht.com/
+             v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_
+             MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
           </a>
           <div class="scale-media" id="trailer-video-container">
           </div>
@@ -110,7 +129,8 @@ main_page_content = '''
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">VDS' Fresh Tomatoes Movie Trailers</a>
+            <a class="navbar-brand"
+               href="#">VDS' Fresh Tomatoes Movie Trailers</a>
           </div>
         </div>
       </div>
@@ -125,16 +145,35 @@ main_page_content = '''
 # A single movie entry html template
 #   - add custom fields for vds' version
 movie_tile_content = '''
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-    <img src="{poster_image_url}" width="220" height="342">
-    <h2>{movie_title}</h2>
-    <h5>{movie_date}</h5>
-    <h6>{movie_cast}</h6>
+<div class="col-md-6 col-lg-4 movie-tile text-center"
+ data-trailer-youtube-id="{trailer_youtube_id}"
+ data-toggle="modal" data-target="#trailer">
+ <img src="{poster_image_url}" width="220" height="342">
+ <h2>{movie_title}</h2>
+ <h5>{movie_date}</h5>
+ <h6>{movie_cast}</h6>
 </div>
 '''
 
 
 def create_movie_tiles_content(movies):
+    '''
+    function:
+        create_movie_tiles_content(movies)
+    arguments:
+        movies - list of movie attributes:
+            title
+            release date
+            cast
+            poster image url
+            trailer url
+    return string:
+        title
+        release date
+        cast
+        poster image url
+        trailer url
+    '''
     # The HTML content for this section of the page
     content = ''
     for movie in movies:
@@ -157,7 +196,26 @@ def create_movie_tiles_content(movies):
         )
     return content
 
+
 def open_movies_page(movies):
+    '''
+    function:
+        open_movies_page(movies)
+    arguments:
+        movies - Python list of movie identifiers containing
+            these string attributes:
+                title
+                release date
+                cast
+                poster image url
+                trailer url
+    return:
+        None
+    side effects:
+        Open and create an HTML file from template data using
+            function create_movie_tiles_content(movies)
+        Execute a web browser and open the generated HTML file
+    '''
     # Create or overwrite the output file
     output_file = open('vds_fresh_tomatoes.html', 'w')
 
