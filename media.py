@@ -9,13 +9,15 @@ media.py
 """
 import webbrowser
 
+
 class Movie():
-    def __init__(self, movie_title, movie_storyline, movie_release_date, movie_cast, movie_poster_image, movie_trailer):
-        self.title               = movie_title
-        self.release_date        = movie_release_date
-        self.cast                = movie_cast
-        self.storyline           = movie_storyline
-        self.poster_image_url    = movie_poster_image
+    def __init__(self, movie_title, movie_storyline, movie_release_date,
+                 movie_cast, movie_poster_image, movie_trailer):
+        self.title = movie_title
+        self.release_date = movie_release_date
+        self.cast = movie_cast
+        self.storyline = movie_storyline
+        self.poster_image_url = movie_poster_image
         self.trailer_youtube_url = movie_trailer
 
     def show_poster(self):
